@@ -1,6 +1,7 @@
 * {
     font-family: sans-serif;
     border: none;
+    color: #011A27;
 }
 
 .hn_text {
@@ -17,7 +18,7 @@
     width: 95%;
     position: relative;
     /*.text_underline::beforeの親要素*/
-    border-top: 3px solid #c2c2c2;
+    border-top: 3px solid #CACCAA;
     /*hn_textの下線*/
 }
 
@@ -32,7 +33,7 @@
     height: 2px;
     /*高さ*/
     content: '';
-    background-color: #3be5ae;
+    background-color: #E6B624;
     /*アニメーションの色*/
     transition: all 0.5s;
     -webkit-transition: all 0.5s;
@@ -59,34 +60,36 @@
 button {
     font-weight: bold;
     padding: 5px 10px;
-    background-color: lightskyblue;
+    background-color: mediumaquamarine;
     color: #fff;
-    border-color: #3BC24d;
+   
 }
 
-.shift_cl{background-color:#3be5ae;}
+.shift_cl{background-color:lightcoral;}
 
-.pop_cl{background-color:#3be5ae;}
+.pop_cl{background-color:lightcoral;}
 
 
 
 ruby {
-    ruby-position: under;
+    ruby-position:top;
+    
 }
 
 rt {
     transform: translateY(6em);
-    color: forestgreen;
+    color: #063852;
 }
 
 
 .text_underline2 {
 
     border-bottom: solid;
-    border-color: #3be5ae;
+    border-color: mediumaquamarine;
     border-width: 3px;
 
 }
+
 
 
 #i_no {
@@ -102,7 +105,7 @@ table,td,th {
 }
 
 th {
-    background-color: lightskyblue;
+    background-color: #063852;
     color: white;
     border-color: dimgray;
     padding: 0 5px;
@@ -115,27 +118,92 @@ td {
 
 
 #mmmm{margin-top: 0px;
-    border: solid 3px skyblue;
+background: #F5F5E5;
     margin-right: 100px;
     padding: 10px;
-    font-size: 13px;
+    font-size: 14px;
+     box-shadow: mediumaquamarine 4px 4px 0px  ;
     
 }
 
 
-#asa{color: lightskyblue;}
+#asa{ background:   mediumaquamarine;
+    padding-left: 10px;
+    padding-right: 10px;
+color: white;}
 
-#asa2{color: #3be5ae;}
+#asa2{
+ background:   lightcoral;
+    padding-left: 10px;
+    padding-right: 10px;
+color: white;}
 
+
+
+.tent:hover .mk{
+ display: nonr;
+    
+    }
 
 .mk{float: right;
-
-    border: solid 3px dimgray;
     margin-right: 100px;
     padding: 10px;
     font-size: 13px;
-    
+    background: #F5F5E5;
+  box-shadow: 5px 5px 0px  mediumaquamarine;
+ 
+
 }
 
 
+.bor{font-weight: bold;
+border-bottom: solid navy;}
+ 
+
+ .tab {
+      display: inline-block;          /* インラインブロック化 */
+      border-width: 1px 1px 0px 1px;  /* 上側と左右に枠線を引く */
+      border-style: solid;            /* 枠線の種類は「実線」 */
+      border-color: white;           
+      /* 左上と右上の角だけを丸くする */
+      padding: 0.75em 1em;            /* 内側の余白量 */
+      font-weight: bold;              /* タブの文字を太字にする */
+      color: black;                   /* タブの文字色：黒色 */
+      background-color: #e0e0e0;      /* タブの(非選択状態の)背景色：灰色 */
+   }
+
+   /* ▼タブにマウスポインタが載った際の装飾 */
+   .tab:hover {
+      color: white;                /* タブの文字色：緑色 */
+      background-color: #ccffcc;   /* タブの背景色：淡い緑色 */
+      cursor: pointer;             /* マウスポインタの形状を「指(指し示す形)」にする */
+   }
+
+   /* ▼選択状態のタブ(＝チェックが入っているラジオボタンの隣にあるタブの装飾) */
+    .radbo:checked + .tab {
+      color: red;                  /* タブの文字色：赤色 */
+      background-color: #ffffcc;   /* タブの背景色：淡い黄色 */
+   }
+
+.tabbox  .radbo { display: none; }
+
+
+ .tabcontent {
+      display: none;             /* 標準では非表示にする */
+      padding: 1em;              /* 内側の余白量 */
+      background-color: white; /* 背景色：(※選択中のタブの背景色と合わせます) */
+   }
+
+   /* ▼チェックが入っているラジオボタンに対応するタブの中身を表示する */
+   #tabcheck1:checked ~ #tabcontent1 { display: block; }
+   #tabcheck2:checked ~ #tabcontent2 { display: block; }
+   #tabcheck3:checked ~ #tabcontent3 { display: block; }
+
+   .radio:checked + .tab {
+      z-index: 10;         /* ※2A */
+      position: relative;  /* ※3 */
+   }
+  
+
+  
 

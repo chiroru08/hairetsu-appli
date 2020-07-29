@@ -9,10 +9,9 @@
 
 <div id="app">
 
-  <h1>OJK参上</h1>
+<br>
     
-    <p id="mmmm" style="float: right">配列の値：に文字を入力し、<span id="asa">水色のボタン</span>を押すと配列に入力した値が反映されます。<br><br><span id="asa2">緑色のボタン</span>は配列の値が削除されます。
-    <br><br>PUSHやSHIFTなどのボタンを使って、<br>それぞれのボタン操作の意味を理解しましょう。</p>
+    <h1>配列学習補助アプリ</h1><br>
     
     
     <div style="float: left">
@@ -31,13 +30,17 @@
         <div class="text_underline"> </div>
 
     </div>
-
+<p class="mk"><span class="bor">配列の値：</span>に文字を入力し、<br><br><span id="asa">この色のボタン</span>を押すと配列に入力した値が<span class="bor">追加</span>されます。<br><br><span id="asa2">この色のボタン</span>は配列の値が<span class="bor">削除</span>されます。<br><br>その下の行では入力した配列が反映されます。<br><br>値の下には要素（インデックス番号）も表示されます。</p>
     　　　　
  
-
-    <br><br><br><br>
-
-    <button class="push_cl" type="submit" @click="push_bt">PUSH</button>
+<br><br><br>
+    <br><br><br><br><br><div class="tabbox">
+   <input type="radio" name="tabset" id="tabcheck1" checked class="radbo"><label for="tabcheck1" class="tab">1</label>
+   <input type="radio" name="tabset" id="tabcheck2"   class="radbo"      ><label for="tabcheck2" class="tab">2</label>
+   <input type="radio" name="tabset" id="tabcheck3"    class="radbo"     ><label for="tabcheck3" class="tab">3</label>
+  
+    
+     <div class="tabcontent" id="tabcontent1"><br><br>  <button class="push_cl" type="submit" @click="push_bt">PUSH</button>
 
     　<button class="unshift_cl" type="submit" @click="unshift_bt" style="margin-left: 15px">UNSHIFT</button>
 
@@ -46,16 +49,10 @@
     
     
     　<button class="pop_cl" type="submit" @click="shift_bt" style="margin-left: 15px">SHIFT</button>
-
-
-    
-
-    <!--  <span>　　要素数は {{yousosu}} です</span>-->
-
-
-    <br><br><br>
-<p class="mk">入力した配列が反映されます。値の下には要素（インデックス番号）も表示されます。</p>
-    <span> <ruby>let {{hairetsu_name}}
+          <p class="mk" style="float: right">
+    PUSHやSHIFTなどのボタンを使って、<br>それぞれのボタン操作の意味を理解しましょう。</p><br><br>
+        
+<span class="item"> <ruby>let {{hairetsu_name}}
             <rt>要素(インデックス)</rt>
         </ruby>
         = [<label v-for="(yousomei, index) of inputs">
@@ -68,20 +65,36 @@
             </span>
         </label>]
     </span>
-
-
-    <br><br><br><p class="mk">要素から配列の値を参照できます。数字を変更して、要素と値の関係を理解しましょう</p><br>
-
+<br><br><br>
+</div>
+   
     
     
-    <span>{{hairetsu_name}}[<input　v-model="index_no" type="number" id="i_no" min="0">]
+    <div class="tabcontent" id="tabcontent2">
+        <br><br><button class="push_cl" type="submit" @click="push_bt">PUSH</button>
+<button class="shift_cl" type="submit" @click="pop_bt" style="margin-left: 15px">POP</button>    
+<p class="mk">配列の値から要素、要素から配列の値を参照できます。<br>また、配列名.lengthは要素数を表します。<br>値を選択して要素との関係や文の意味を理解しましょう</p>
+  <br><br><span class="item"> <ruby>let {{hairetsu_name}}
+            <rt>要素(インデックス)</rt>
+        </ruby>
+        = [<label v-for="(yousomei, index) of inputs">
+            <span v-if="index >= 1"> , </span>
+
+            <span class="text_underline2">
+                <ruby>{{ yousomei.name }}
+                    <rt>{{index}}</rt>
+                </ruby>
+            </span>
+        </label>]
+    </span><br><br><br>
+       
+        <span> {{hairetsu_name}}[<input　v-model="index_no" type="number" id="i_no" min="0">]
         は{{atai}}です
     </span>
-
-
-    <br><br><br>
-<p class="mk">配列の値から要素を参照できます。配列の値を選択して要素との関係を理解しましょう</p><br>
-    <span><select　v-model="selected" >
+        
+       
+       <br><br>
+<span><select　v-model="selected" >
             <option v-for="(option,index) of options" v-bind:value="option.value">
                 {{option.text}}
             </option>
@@ -90,17 +103,25 @@
     <span>
         は {{hairetsu_name}}[{{sele}}] です
     </span>
+        
+        <br><br>
+<span>{{hairetsu_name}}.lengthは　{{yoo}}　です</span>
+</div>
+   <div class="tabcontent" id="tabcontent3"> <br><br>     
+     <button class="push_cl" type="submit" @click="push_bt">PUSH</button>
+<button class="shift_cl" type="submit" @click="pop_bt" style="margin-left: 15px">POP</button><p class="mk">「要素」「値」「要素数」を表形式で全て見ることが出来ます。</p><br><br><span id="item"> <ruby>let {{hairetsu_name}}
+            <rt style="color: white">要素(インデックス)</rt>
+        </ruby>
+        = [<label v-for="(yousomei, index) of inputs">
+            <span v-if="index >= 1"> , </span>
 
-
-    <br><br><br><p class="mk">配列名.lengthが表す数値が表示されます。配列の要素数となります。</p><br>
-
-    <span>{{hairetsu_name}}.lengthは　{{yoo}}　です</span>
-
-
-    <br><br>
-
-    <table style="float: left">
-        <tr>
+            <span class="text_underline2">
+                <ruby>{{ yousomei.name }}
+                    <rt>{{index}}</rt>
+                </ruby></span>
+        </label>]
+    </span><br><br> <table> 
+       <tr>
             <hr>
             <th>インデックス(要素)</th>
 
@@ -114,8 +135,17 @@
             <td> {{index+1}}</td>
         </tr>
 
-    </table>
-<p class="mk">「要素」「値」「要素数」を表形式で全て見ることが出来ます。</p><br>
+    </table></div>
+</div>
+
+    
+        
+    
+
+    <!--  <span>　　要素数は {{yousosu}} です</span>-->  <br><br><br>
+      <br>
+    
+
     <!--  <hr>
     <br><br>
     <span>for(let i of {{hairetsu_name}}){print(i)}
@@ -125,7 +155,7 @@
     </span>-->
 
 
-</div>
+    </div>
 
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
