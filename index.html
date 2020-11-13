@@ -2,541 +2,521 @@
 <html>
 
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="CSS/hairetsusty.css">
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="CSS/hairetsusty.css">
 </head>
 
 <body>
-    <div id="app">
+  <div id="app">
 
-        <!-- TOPページ -->
-        <div class="row-flex">
-            <div id="setArray" v-if="setArray">
-                <div id="mon">   
-                    
-                    <!--      <label for="hn_text">配列名 :</label>
+    <!-- TOPページ -->
+    <div class="row-flex">
+      <div id="setArray" v-if="setArray"> <!-- 問題画面とスイッチ -->
+
+        <p class="explain">
+            
+            <span class="bold">配列の値：</span>の欄に<span class="bold">要素として入れたい言葉</span>を1つ入力して<span class="colsel">青色</span>のボタンを押すと★の配列に挿入されます<br>
+            <span class="bold">配列の値：</span>の欄の入力の有無に関わらず、<span class="colset">ピンク色</span>のボタンを押すと★の配列から
+        要素が削除されます<br><br>
+          数字のボタンをクリックすると学べる内容（画面）が変わります<br>
+          各画面の説明は一番下の「詳しい使い方」をクリックしてください
+        </p>
+
+        <div class="tabbox">
+          <input type="radio" name="tabset" id="tabcheck1" class="radbo" v-model="selectedTab" value=1><label for="tabcheck1" class="tab">1</label>
+          <input type="radio" name="tabset" id="tabcheck2" class="radbo" v-model="selectedTab" value=2><label for="tabcheck2" class="tab" value=2>2</label>
+          <input type="radio" name="tabset" id="tabcheck3" class="radbo" v-model="selectedTab" value=3><label for="tabcheck3" class="tab" value=3>3</label>
+          <input type="radio" name="tabset" id="tabcheck4" class="radbo" v-model="selectedTab" value=4><label for="tabcheck4" class="tab" value=4>4</label>
+        </div>
+
+
+        <div id="mon">
+          <!--      <label for="hn_text">配列名 :</label>
                     <input　v-model="hairetsu_name" type="text" class="hn_text">
                     <div class="text_underline"> </div>-->
-                    <br><br>
-                    <label for="hn_text" 　class="bold">配列の値 ：</label>
-                    <input　v-model="name" type="text" class="hn_text">
-                    <div class="text_underline"> </div>
+          <br><br>
+          <label for="hn_text" 　class="bold">配列の値 ：</label>
+          <input　v-model="name" type="text" class="hn_text">
+          <div class="text_underline"> </div>
+        </div>
 
 
+        <div>
+          <ruby class="mar"><span class="bold">★　let {{hairetsu_name}}</span>
+            <rt>インデックス</rt>
+          </ruby>
+          = [<label v-for="(yousomei, index) of inputs">
+            <span v-if="index >= 1"> , </span>
+            <span class="text_underline2">
+              <ruby class="colsel" v-if="index == 0 && red == 1"> {{ yousomei.name }}
+                <rt>{{index}}</rt>
+              </ruby>
+              <ruby v-else-if="index == inputs.length-1 && red == 2" class="colsel"> {{ yousomei.name }}
+                <rt>{{index}}</rt>
+              </ruby>
+              <ruby v-else-if="index == 0 && red == 3" class="colset"> {{ yousomei.name }}
+                <rt class="colset">{{index}}</rt>
+              </ruby>
+              <ruby v-else-if="index == inputs.length-1 && red == 4" class="colset"> {{ yousomei.name }}
+                <rt class="colset">{{index}}</rt>
+              </ruby>
+              <ruby v-else> {{ yousomei.name }}
+                <rt>{{index}}</rt>
+              </ruby>
+            </span>
+          </label>]
+        </div>
 
+        <!-- タブ -->
+        <div id=main>
 
+          <div class="tabbox">
 
-                </div>
-             
+            <!-- タブ1 -->
+            <div class="tabcontent" id="tabcontent1" :style="tabStyle[1]">
+              <br><br>
 
-                <span> <ruby class="mar"><span class="bold">★　let {{hairetsu_name}}</span>
-                        <rt>インデックス</rt>
-                    </ruby>
-                    = [<label v-for="(yousomei, index) of inputs">
-                        <span v-if="index >= 1"> , </span>
+              <button class="push_cl" type="submit" @click="push_bt">PUSH</button><button class="unshift_cl" type="submit" @click="unshift_bt">UNSHIFT</button>
 
-                        <span class="text_underline2">
-                            <ruby class="colsel" v-if="index == 0 && red== 1"> {{ yousomei.name }}
-                                <rt>{{index}}</rt>
-                            </ruby>
+              <button class="shift_cl" type="submit" @click="pop_bt">POP</button><button class="pop_cl" type="submit" @click="shift_bt">SHIFT</button>
+              <br><br>
 
+              <p class="mk">
+                <p> <span class="colsel">PUSH</span>は配列の末尾に要素を追加、<span class="colsel">UNSHIFT</span>は配列の先頭に要素を追加、<br><span class="colset">POP</span>は配列の末尾の要素を削除、<span class="colset">SHIFT</span>は配列の先頭の要素を削除するメソッドです<br>それぞれのボタンを押してメソッドの意味を理解してみましょう</p>
 
-                            <ruby v-else-if="index == inputs.length-1 && red== 2" class="colsel"> {{ yousomei.name }}
-                                <rt>{{index}}</rt>
-                            </ruby>
-
-                            <ruby v-else-if="index == 0 && red== 3" class="colset"> {{ yousomei.name }}
-                                <rt class="colset">{{index}}</rt>
-                            </ruby>
-
-                            <ruby v-else-if="index == inputs.length-1 && red== 4" class="colset"> {{ yousomei.name }}
-                                <rt class="colset">{{index}}</rt>
-                            </ruby>
-
-                            <ruby v-else> {{ yousomei.name }}
-                                <rt>{{index}}</rt>
-                            </ruby>
-
-                        </span>
-                    </label>]
-                </span>
-                <p>数字のボタンをクリックすると学べる内容（画面）が変わります<br>各画面の説明は一番下の「詳しい使い方」をクリックしてください<br></p>
-            
-                <!-- タブ -->
-                <div id=main>
+              <details>
+                <summary>詳しい使い方</summary><br>
+                <h2 class="bold">要素の追加方法</h2>
+                <img src="1.png" alt="説明１" 　width="80%"><br><br><br><p> <span class="colsel">PUSH</span>を押すと配列の末尾に要素が追加されます
+                 <br> <span class="colsel">UNSHIFT</span>を押すと配列の先頭に要素が追加されます</p>
+                 
+                <h2 class="bold">要素の削除方法</h2>
+                <img src="2.png" alt="説明2" 　width="80%">
                   
-                    <div class="tabbox">
-                      
-  
-                        <!-- タブ1 -->  <input type="radio" name="tabset" id="tabcheck1" checked class="radbo"><label for="tabcheck1" class="tab">1</label>
-                        <input type="radio" name="tabset" id="tabcheck2" class="radbo"><label for="tabcheck2" class="tab">2</label>
-                        <input type="radio" name="tabset" id="tabcheck3" class="radbo"><label for="tabcheck3" class="tab">3</label>
-                        
-                        
-                        <input type="radio" name="tabset" id="tabcheck4" class="radbo"><label for="tabcheck4" class="tab">4</label>
-                        
-                        <div class="tabcontent" id="tabcontent1">
-<br><br>
-                   
-
-                            <button class="push_cl" type="submit" @click="push_bt">PUSH</button><button class="unshift_cl" type="submit" @click="unshift_bt">UNSHIFT</button>
-
-
-
-                            <button class="shift_cl" type="submit" @click="pop_bt">POP</button><button class="pop_cl" type="submit" @click="shift_bt">SHIFT</button>
-
-                            <br><br>
-                            
-                            
-                            <p class="mk">
-                             <p>  <span class="colsel">PUSH</span>は配列の末尾に要素を追加、<span class="colsel">UNSHIFT</span>は配列の先頭に要素を追加、<br><span class="colset">POP</span>は配列の末尾の要素を削除、<span class="colset">SHIFT</span>は配列の先頭の要素を削除するメソッドです<br>それぞれのボタンを押してメソッドの意味を理解してみましょう</p>         
-                            
-                            
-                                 <div >
                   
-                </div>      
-                            <details>
-                                <summary>詳しい使い方</summary><br>
-                                <h2 class="bold">要素の追加方法</h2>
-                            <img src="1.png" alt="説明１"　width="80%"><br><br><br>
-                                <h2 class="bold">要素の削除方法</h2>
-                                <img src="2.png" alt="説明2"　width="80%">                          
- </details> 
+                   <p> <span class="colset">POP</span>を押すと配列の末尾の要素を削除します<br><span class="colset">SHIFT</span>を押すと配列の先頭の要素を削除します</p>
+              </details>
+            </div>
 
-                        </div>
+            <!-- タブ2 -->
+            <div class="tabcontent" id="tabcontent2" :style="tabStyle[2]">
+              <br><br>
+              
+              <button class="push_cl" type="submit" @click="push_bt">PUSH</button>
+              <button class="shift_cl" type="submit" @click="pop_bt" style="margin-left: 15px">POP</button>
+              <br><br>
 
-                        <!-- タブ2 -->
-                        <div class="tabcontent" id="tabcontent2">
-                            <br><br>
-                       
-                            
+              <span class="bold"> {{hairetsu_name}}[<input v-model="index_no" type="number" id="i_no" min="0">]
+                <br> は{{atai}}です
+              </span>
+              <br><br>
 
-                            <button class="push_cl" type="submit" @click="push_bt">PUSH</button>
-                            <button class="shift_cl" type="submit" @click="pop_bt" style="margin-left: 15px">POP</button>
+              <span><select　v-model="selected">
+                  <option v-for="(option,index) of options" v-bind:value="option.value">
+                    {{option.text}}
+                  </option>
+                </select>
+              </span>
+              <span class="bold">
+                は {{hairetsu_name}}[{{sele}}] です
+              </span>
+              <br><br>
 
-                            <br><br>
-
-
-                            <span 　class="bold"> {{hairetsu_name}}[<input 　v-model="index_no" type="number" id="i_no" min="0">]
-                                <br> は{{atai}}です
-                            </span>
-
-
-                            <br> <br>
-                            <span ><select　v-model="selected">
-                                    <option v-for="(option,index) of options" v-bind:value="option.value">
-                                        {{option.text}}
-                                    </option>
-                                </select>
-                            </span>
-                            <span class="bold">
-                                は {{hairetsu_name}}[{{sele}}] です
-                            </span>
-
-                            <br><br>
-                            <span class="bold">{{hairetsu_name}}.lengthは　{{yoo}}　です</span>
-
-                           <br><br><br><details>
-                                <summary>詳しい使い方</summary>
-                    
-                                <div> <p class="bold">PUSH・POPについては、ボタン1の画面の「詳しい使い方」を見て下さい</p>    <img src="3.png" alt="説明3"　width="70%"> </div>
- </details> 
-                     
-                        </div>
-                                
-                       
-
-
-                        <!-- タブ3 -->
-                        <div class="tabcontent" id="tabcontent3"> <br><br>
-                           
-                        
-                              
-                           
-                            <button class="push_cl" type="submit" @click="push_bt">PUSH</button>
-                            <button class="shift_cl" type="submit" @click="pop_bt" style="margin-left: 15px">POP</button>
-                            <br>
-                          
-                             
-                           <br>
-                            <table>
-                                <tr>
-                                    <hr>
-                                    <th>インデックス</th>
-
-                                    <th>配列の値(要素)</th>
-                                    <th>要素数</th>
-                                </tr>
-
-                                <tr v-for="(yousomei, index) of inputs">
-                                    <td>{{index}} </td>
-                                    <td>{{ yousomei.name }} </td>
-                                    <td> {{index+1}}</td>
-                                </tr>
-
-                            </table>
-                            <br><br><br>
-               <details>
-                                <summary>詳しい使い方</summary>
-                    
-                                <div> <p class="bold">PUSH・POPについては、ボタン1の画面の「詳しい使い方」を見て下さい</p>    <img src="4.png" alt="説明4
-                                    "　width="70%"> </div>
- </details> 
-                        </div>
-                        
-                        
-                        <div class="tabcontent" id="tabcontent4">              <br><br>          <button class="push_cl" type="submit" @click="push_bt">PUSH</button>
-                            <button class="shift_cl" type="submit" @click="pop_bt" style="margin-left: 15px">POP</button>
-                            <br>
-                           <br><br>
-                    <button id="mondaibt" class="mondai" type="submit" @click="mondai_bt">問題</button>
-              <br><br><br>  <details>
-                               <summary>詳しい使い方</summary>
-                    
-                            <div> <p>PUSH・POPについては、ボタン1の画面の「詳しい使い方」を見て下さい</p>   <p　class="bold">3つ以上配列に要素がある状態で問題ボタンを押すと問題が始まります</p> <img src="5.png" alt="説明5"　width="70%"> </div>
- </details> 
-                           </div>
-
-                        
-                        
-                    </div> <!-- tabbox -->
-                </div> <!-- main -->
-
-                <!-- 問題ボタン -->
-             
-
-            </div> <!-- setArray -->
-
-            <!-- 問題回答画面 -->
-            <div id="questionMode" v-else>
-
-                <div id="question" v-if="!questioned" >
-                    <div name="ttt">
-                     
-                        <span id="item"> let {{hairetsu_name}}
-                            = [<label v-for="(yousomei, index) of inputs">
-                                <span v-if="index >= 1"> , </span>
-                                <span>
-                                    <ruby>{{ yousomei.name }}
-
-                                    </ruby>
-                                </span>　
-                            </label>]
-                            　のとき </span>
-
-                    </div>
-                    <h3 class="line_mon">{{ questions[questionNumber].state[qNumber] }}</h3>
-                    <br><br><br><br>
-
-                    <button name="sentakushi" v-for="(opt, index) in questions[questionNumber].options[qNumber]" type="button" @click="kai(index)">{{opt}}</button>
+              <span class="bold">{{hairetsu_name}}.lengthは　{{yoo}}　です</span>
+              <br><br><br>
+              
+              <details>
+                <summary>詳しい使い方</summary>
+                <div>
+                  <p class="bold">PUSH・POPについては、ボタン1の画面の説明を見て下さい</p> <img src="3.png" alt="説明3" 　width="70%">
                 </div>
+              </details>
+            </div>
 
-                <!-- 答え画面〇 -->
-                <div v-if="questioned && correct">
-                    <!--questionedがtrue,correctがtrue  -->
-                    <img :src="imageCorrect" height="300">
-                    <button class="mondai" type="submit" @click="next_bt">次へ</button>
-                    <button class="mondai" type="submit" @click="syuryo_bt">問題を終わる</button>
+
+            <!-- タブ3 -->
+            <div class="tabcontent" id="tabcontent3" :style="tabStyle[3]">
+              <br><br>
+
+              <button class="push_cl" type="submit" @click="push_bt">PUSH</button>
+              <button class="shift_cl" type="submit" @click="pop_bt" style="margin-left: 15px">POP</button>
+              <br><br>
+
+              <table>
+                <tr>
+                  <hr>
+                  <th>インデックス</th>
+                  <th>配列の値(要素)</th>
+                  <th>要素数</th>
+                </tr>
+
+                <tr v-for="(yousomei, index) of inputs">
+                  <td>{{index}} </td>
+                  <td>{{yousomei.name}} </td>
+                  <td v-if="index == 0" :rowspan="inputs.length">{{inputs.length}}</td>
+                </tr>
+
+              </table>
+              <br><br><br>
+
+              <details>
+                <summary>詳しい使い方</summary>
+                <div>
+                  <p class="bold">PUSH・POPについては、ボタン1の画面の説明を見て下さい</p>
+                  <img src="4.png" alt="説明4" width="70%">
                 </div>
+              </details>
+            </div>
 
-                <!-- 答え画面× -->
-                <div v-if="questioned && !correct">
-                    <!--questionedがtrue,correctがfalse  -->
-                    <img :src="imageMiss" height="300">
-                    <button class="mondai" type="submit" @click="next_bt">次へ</button>
-                    <button class="mondai" type="submit" @click="syuryo_bt">問題を終わる</button>
+            <!-- タブ4 -->
+            <div class="tabcontent" id="tabcontent4" :style="tabStyle[4]">
+              <br><br>
+              
+              <button class="push_cl" type="submit" @click="push_bt">PUSH</button>
+              <button class="shift_cl" type="submit" @click="pop_bt" style="margin-left: 15px">POP</button>
+              <br><br><br>
+              
+              <button id="mondaibt" class="mondai" type="submit" @click="mondai_bt">問題</button>
+              <br><br><br>
+              
+              <details>
+                <summary>詳しい使い方</summary>
+
+                <div>
+                  <p>PUSH・POPについては、ボタン1の画面の説明を見て下さい</p>
+                  <p　class="bold">3つ以上配列に要素がある状態で問題ボタンを押すと問題が始まります</p> <img src="5.png" alt="説明5" 　width="70%">
                 </div>
-
-
-            </div> <!-- questionMode -->
-        </div> <!-- row-flex -->
-    </div> <!-- app -->
-
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-
-    <script type="text/javascript">
-        let app = new Vue({
-            el: '#app',
-            data: {
-                setArray: true, //画面遷移
-                hairetsu_name: "item",
-                name: '',
-                inputs: [],
-                options: [],
-                yousosu: 0,
-                index_no: 0,
-                selected: '',
-                mm: -1,
-                kk: 0,
-                ll: 0,
-                red: 0,
-
-                imageMiss: 'ばつ.jpg',
-                imageCorrect: 'まる.jpg',
-                questionNumber: 0, // 大問(今2問)
-                qNumber: 0, // 小問（基本配列の数）
-                questions: [{
-                        before: '「 私は',
-                        after: 'が好きです 」という文を作るのに正しい文はどれでしょうか？'
-                    },
-                    {
-                        before: 'console.log(',
-
-                        after: ')　を記述したときコンソールに表示されるのはどれか'
-                    },
-                    {
-                        before: '配列',
-                        after: 'の要素数はいくつでしょうか？'
-                    },
-                ],
-                questioned: false,
-                correct: false
-            },
-
-            methods: {
-
-                push_bt: function() {
-                    if (!this.name) {
-
-                        window.alert('未入力です')
-                        this.name = '';
-                        return;
-                    }
-
-                    this.inputs.push({
-                        name: this.name,
-                    });
-
-                    this.options.push({
-                        text: this.name,
-                        value: this.kk
-                    });
-
-                    this.name = '';
-                    this.kk = this.kk + 1;
-                    this.red = 2;
-
-
-
-                },
-
-                unshift_bt: function() {
-                    if (!this.name) {
-                        window.alert('未入力です')
-                        this.name = '';
-                        return;
-                    };
-
-                    this.inputs.unshift({
-                        name: this.name,
-                    });
-
-                    this.options.unshift({
-                        text: this.name,
-                        value: this.mm,
-                    });
-
-                    this.ll = this.ll + 1;
-                    this.mm = this.mm - 1;
-                    this.name = '';
-                    this.red = 1;
-
-
-                },
-
-                pop_bt: function() {
-                    if (!this.inputs.length) {
-                        window.alert('これ以上消せません')
-                        return;
-                    }
-                    this.inputs.pop();
-                    this.options.pop();
-                    this.kk = this.kk - 1;
-                    this.red = 4;
-
-
-                },
-
-                shift_bt: function() {
-                    if (!this.inputs.length) {
-                        window.alert('これ以上消せません')
-                        return;
-                    }
-                    this.inputs.shift();
-                    this.options.shift({});
-                    this.mm = this.mm + 1;
-                    this.ll = this.ll - 1;
-                    this.red = 3;
-
-                },
-
-                mondai_bt: function() {
-                    
-                    
-
-                    if (this.inputs.length < 3) {
-                        window.alert('3つ以上入力して下さい')
-                        return;
-                    }
-
-                    for (let qn = 0; qn < this.questions.length; qn += 1) {
-
-                        let questionOrder = [];
-
-                        // 選択肢をランダムにする
-                        for (let n = 0; n < this.inputs.length; n += 1) {
-                            questionOrder.push(n);
-                        }
-                        questionOrder = shuffle(questionOrder);
-
-                        // 正解番号
-                        this.questions[qn].correct = questionOrder;
-
-                        // 質問
-                        this.questions[qn].state = [];
-                        this.questions[qn].options = [];
-
-
-                        for (let n = 0; n < this.inputs.length; n += 1) {
-                            if (qn == 0) {
-                                this.questions[qn].state.push(this.questions[qn].before + this.inputs[questionOrder[n]].name + this.questions[qn].after);
-                            } else if (qn == 1) {
-                                this.questions[qn].state.push(this.questions[qn].before + this.hairetsu_name + "[" + questionOrder[n] + "]" + this.questions[qn].after);
-                            } else if (qn == 2) {
-                                this.questions[qn].state.push(this.questions[qn].before + this.questions[qn].after);
-                            }
-
-                            // 選択肢の生成
-                            this.questions[qn].options[n] = [];
-                            for (let i = 0; i <= this.inputs.length; i += 1) {
-
-                                if (qn == 0) {
-                                    this.questions[qn].options[n].push("'私は'+" + this.hairetsu_name + "[" + i + "]" + "+'が好きです';");
-                                } else if (qn == 1) {
-                                    if (i < this.inputs.length) {
-                                        this.questions[qn].options[n].push(this.inputs[i].name);
-                                    }
-
-                                } else if (qn == 2) {
-
-                                    if (i < 2) {
-                                        this.questions[qn].options[n].push(this.inputs.length - 1 + i + "つ");
-
-
-                                    }
-                                }
-
-
-
-
-                            }
-                        }
-                    }
-
-                    this.setArray = false;
-                },
-
-                kai: function(n) {
-                    // 〇か×かv-if
-                    console.log(n);
-                    console.log(this.questions[this.questionNumber].correct[this.qNumber]);
-                    if (n == this.questions[this.questionNumber].correct[this.qNumber] && this.questionNumber < 2) {
-                        this.questioned = true;
-                        this.correct = true;
-                    } else {
-                        this.questioned = true;
-                        this.correct = false;
-                    }
-
-                    if (this.questionNumber == 2) {
-                        if (n == 1) {
-                            this.questioned = true;
-                            this.correct = true;
-                        }
-                    }
-                },
-
-                next_bt: function() {
-
-
-                    this.qNumber += 1;
-
-                    if (this.questionNumber == 2) { //問題１問のqn
-                        this.qNumber = 0;
-                        this.questionNumber = 0;
-                    }
-
-                    if (this.qNumber >= this.inputs.length) {
-                        this.qNumber = 0;
-                        this.questionNumber += 1;
-
-                        if (this.questionNumber >= this.questions.length) {
-                            this.questionNumber = 0;
-                        }
-                    }
-                    this.questioned = false;
-                },
-
-                syuryo_bt: function() {
-                    // v-if
-                    this.questioned = false;
-                    this.setArray = true;
-
-                    this.qNumber = 0;
-                    this.questionNumber = 0;
-
-                    for (let qn = 0; qn < this.questions.length; qn += 1) {
-                        this.questions[qn].options.length = 0;
-                    }
-
-                },
-            },
-
-            computed: {
-
-                qOptions: function() {
-                    return this.allData[this.questionNumber].slice(2, this.allData[this.questionNumber].length);
-                },
-
-                atai: function() {
-                    if (this.inputs[this.index_no] != undefined) {
-                        let no_atai = this.inputs[this.index_no].name;
-                        return no_atai;
-                    }
-                    return 'undefined ';
-
-                },
-
-
-                sele: function() {
-                    if (this.selected + this.ll < 0) {
-                        return 0;
-                    }
-                    return this.selected + this.ll;
-                },
-
-                yoo: function() {
-                    return this.inputs.length;
-                }
-            },
-        });
-
-
-        // ツール関数
-        function shuffle([...array]) {
-            for (let i = array.length - 1; i >= 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
+              </details>
+            </div>
+          </div> <!-- tabbox -->
+        </div> <!-- main -->
+
+        <!-- 問題ボタン -->
+
+
+      </div> <!-- setArray -->
+
+      <!-- 問題回答画面 -->
+      <div id="questionMode" v-else>
+
+        <div id="question" v-if="!questioned">
+          <div name="ttt">
+
+            <span id="item"> let {{hairetsu_name}}
+              = [<label v-for="(yousomei, index) of inputs">
+                <span v-if="index >= 1"> , </span>
+                <span>
+                  <ruby>{{ yousomei.name }}
+
+                  </ruby>
+                </span>　
+              </label>]
+              　のとき </span>
+
+          </div>
+          <h3 class="line_mon">{{ questions[questionNumber].state[qNumber] }}</h3>
+          <br><br><br><br>
+
+          <button name="sentakushi" v-for="(opt, index) in questions[questionNumber].options[qNumber]" type="button" @click="kai(index)">{{opt}}</button>
+        </div>
+
+        <!-- 答え画面〇 -->
+        <div v-if="questioned && correct">
+          <!--questionedがtrue,correctがtrue  -->
+          <img :src="imageCorrect" height="300">
+          <button class="mondai" type="submit" @click="next_bt">次へ</button>
+          <button class="mondai" type="submit" @click="syuryo_bt">問題を終わる</button>
+        </div>
+
+        <!-- 答え画面× -->
+        <div v-if="questioned && !correct">
+          <!--questionedがtrue,correctがfalse  -->
+          <img :src="imageMiss" height="300">
+          <button class="mondai" type="submit" @click="next_bt">次へ</button>
+          <button class="mondai" type="submit" @click="syuryo_bt">問題を終わる</button>
+        </div>
+
+
+      </div> <!-- questionMode -->
+    </div> <!-- row-flex -->
+  </div> <!-- app -->
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <script type="text/javascript">
+    let app = new Vue({
+      el: '#app',
+      data: {
+        setArray: true, //画面遷移
+        hairetsu_name: "item",
+        name: '',
+        inputs: [],
+        options: [],
+        yousosu: 0,
+        index_no: 0,
+        selected: '',
+        selectedTab: 1,
+        mm: -1,
+        kk: 0,
+        ll: 0,
+        red: 0,
+
+        imageMiss: 'ばつ.jpg',
+        imageCorrect: 'まる.jpg',
+        questionNumber: 0, // 大問(今2問)
+        qNumber: 0, // 小問（基本配列の数）
+        questions: [{
+            before: '「 私は',
+            after: 'が好きです 」という文を作るのに正しい文はどれでしょうか？'
+          },
+          {
+            before: '',
+
+            after: 'はどの要素を表すでしょうか'
+          },
+          {
+            before: '配列',
+            after: 'の要素数はいくつでしょうか？'
+          },
+        ],
+        questioned: false,
+        correct: false
+      },
+
+      methods: {
+
+        push_bt: function() {
+          if (!this.name) {
+
+            window.alert('未入力です')
+            this.name = '';
+            return;
+          }
+
+          this.inputs.push({
+            name: this.name,
+          });
+
+          this.options.push({
+            text: this.name,
+            value: this.kk
+          });
+
+          this.name = '';
+          this.kk = this.kk + 1;
+          this.red = 2;
+        },
+
+        unshift_bt: function() {
+          if (!this.name) {
+            window.alert('未入力です')
+            this.name = '';
+            return;
+          };
+
+          this.inputs.unshift({
+            name: this.name,
+          });
+
+          this.options.unshift({
+            text: this.name,
+            value: this.mm,
+          });
+
+          this.ll = this.ll + 1;
+          this.mm = this.mm - 1;
+          this.name = '';
+          this.red = 1;
+        },
+
+        pop_bt: function() {
+          if (!this.inputs.length) {
+            window.alert('これ以上消せません')
+            return;
+          }
+          this.inputs.pop();
+          this.options.pop();
+          this.kk = this.kk - 1;
+          this.red = 4;
+        },
+
+        shift_bt: function() {
+          if (!this.inputs.length) {
+            window.alert('これ以上消せません')
+            return;
+          }
+          this.inputs.shift();
+          this.options.shift({});
+          this.mm = this.mm + 1;
+          this.ll = this.ll - 1;
+          this.red = 3;
+        },
+
+        mondai_bt: function() {
+
+          if (this.inputs.length < 3) {
+            window.alert('3つ以上入力して下さい')
+            return;
+          }
+
+          for (let qn = 0; qn < this.questions.length; qn += 1) {
+
+            let questionOrder = [];
+
+            // 選択肢をランダムにする
+            for (let n = 0; n < this.inputs.length; n += 1) {
+              questionOrder.push(n);
             }
-            return array;
+            questionOrder = shuffle(questionOrder);
+
+            // 正解番号
+            this.questions[qn].correct = questionOrder;
+
+            // 質問
+            this.questions[qn].state = [];
+            this.questions[qn].options = [];
+
+
+            for (let n = 0; n < this.inputs.length; n += 1) {
+              if (qn == 0) {
+                this.questions[qn].state.push(this.questions[qn].before + this.inputs[questionOrder[n]].name + this.questions[qn].after);
+              } else if (qn == 1) {
+                this.questions[qn].state.push(this.questions[qn].before + this.hairetsu_name + "[" + questionOrder[n] + "]" + this.questions[qn].after);
+              } else if (qn == 2) {
+                this.questions[qn].state.push(this.questions[qn].before + this.questions[qn].after);
+              }
+
+              // 選択肢の生成
+              this.questions[qn].options[n] = [];
+              for (let i = 0; i <= this.inputs.length; i += 1) {
+                if (qn == 0) {
+                  this.questions[qn].options[n].push("'私は'+" + this.hairetsu_name + "[" + i + "]" + "+'が好きです';");
+                } else if (qn == 1) {
+                  if (i < this.inputs.length) {
+                    this.questions[qn].options[n].push(this.inputs[i].name);
+                  }
+                } else if (qn == 2) {
+                  if (i < 2) {
+                    this.questions[qn].options[n].push(this.inputs.length - 1 + i + "つ");
+                  }
+                }
+              }
+            }
+          }
+
+          this.setArray = false;
+        },
+
+        kai: function(n) {
+          // 〇か×かv-if
+          console.log(n);
+          console.log(this.questions[this.questionNumber].correct[this.qNumber]);
+          if (n == this.questions[this.questionNumber].correct[this.qNumber] && this.questionNumber < 2) {
+            this.questioned = true;
+            this.correct = true;
+          } else {
+            this.questioned = true;
+            this.correct = false;
+          }
+
+          if (this.questionNumber == 2) {
+            if (n == 1) {
+              this.questioned = true;
+              this.correct = true;
+            }
+          }
+        },
+
+        next_bt: function() {
+
+
+          this.qNumber += 1;
+
+          if (this.questionNumber == 2) { //問題１問のqn
+            this.qNumber = 0;
+            this.questionNumber = 0;
+          }
+
+          if (this.qNumber >= this.inputs.length) {
+            this.qNumber = 0;
+            this.questionNumber += 1;
+
+            if (this.questionNumber >= this.questions.length) {
+              this.questionNumber = 0;
+            }
+          }
+          this.questioned = false;
+        },
+
+        syuryo_bt: function() {
+          // v-if
+          this.questioned = false;
+          this.setArray = true;
+
+          this.qNumber = 0;
+          this.questionNumber = 0;
+
+          for (let qn = 0; qn < this.questions.length; qn += 1) {
+            this.questions[qn].options.length = 0;
+          }
+
+        },
+      },
+
+      computed: {
+        
+        tabStyle: function() {
+          let ts = [];
+          for (let i = 1; i <= 4; i += 1) {
+            ts.push({ display: 'none' });            
+          }
+          ts[this.selectedTab] = { display: 'block' };
+          return ts;
+        },
+
+        qOptions: function() {
+          return this.allData[this.questionNumber].slice(2, this.allData[this.questionNumber].length);
+        },
+
+        atai: function() {
+          if (this.inputs[this.index_no] != undefined) {
+            let no_atai = this.inputs[this.index_no].name;
+            return no_atai;
+          }
+          return 'undefined ';
+
+        },
+
+
+        sele: function() {
+          if (this.selected + this.ll < 0) {
+            return 0;
+          }
+          return this.selected + this.ll;
+        },
+
+        yoo: function() {
+          return this.inputs.length;
         }
+      },
+    });
 
-        function rand(max) {
-            return Math.floor(Math.random() * max);
-        }
-    </script>
 
-    <canvas width="800" height="2000" id="sample" style="background-color:none;">
+    // ツール関数
+    function shuffle([...array]) {
+      for (let i = array.length - 1; i >= 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
 
-    </canvas>
+    function rand(max) {
+      return Math.floor(Math.random() * max);
+    }
+  </script>
+
+  <canvas width="800" height="2000" id="sample" style="background-color:none;">
+
+  </canvas>
 </body></html>
